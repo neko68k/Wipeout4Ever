@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "binfile.h"
 #include "endian_tools.h"
 
@@ -18,9 +17,9 @@ void TRV_Load(BINFILE *file){
 	numverts = filesize>>4;
 	for(int i = 0;i<numverts; i++){
 		// need to swap endian on each of these
-		TRV->x = readDWORD(TRV->x);
-		TRV->y = readDWORD(TRV->y);
-		TRV->z = readDWORD(TRV->z);
+		SWAP_DWORD(TRV->x);
+		SWAP_DWORD(TRV->y);
+		SWAP_DWORD(TRV->z);
 	}
 }
 

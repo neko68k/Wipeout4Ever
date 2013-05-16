@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "binfile.h"
 #include "endian_tools.h"
 #include "TRS.h"
@@ -17,21 +16,21 @@ void TRS_Load(BINFILE *file){
 	numsections = filesize/0x9c;
 	for(int i = 0;i<numsections; i++){
 		// need to swap endian on each of these
-		TRS->previous = readDWORD(TRS->previous);
-		TRS->next = readDWORD(TRS->next);
-		TRS->unk[0] = readDWORD(TRS->unk[0]);
-		TRS->unk[1] = readDWORD(TRS->unk[1]);
-		TRS->unk[2] = readDWORD(TRS->unk[2]);
-		TRS->unkflag = readDWORD(TRS->unkflag);
+		SWAP_DWORD(TRS->previous);
+		SWAP_DWORD(TRS->next);
+		SWAP_DWORD(TRS->unk[0]);
+		SWAP_DWORD(TRS->unk[1]);
+		SWAP_DWORD(TRS->unk[2]);
+		SWAP_DWORD(TRS->unkflag);
 
 		for(int i = 0;i<15;i++){
-			TRS->unk5[i] = readWORD(TRS->unk5[i]);
+			SWAP_DWORD(TRS->unk5[i]);
 		}
 		for(int i = 0;i<8;i++){
-			TRS->unk6[i] = readWORD(TRS->unk6[i]);
+			SWAP_DWORD(TRS->unk6[i]);
 		}
 		for(int i = 0;i<6;i++){
-			TRS->unk7[i] = readWORD(TRS->unk7[i]);
+			SWAP_DWORD(TRS->unk7[i]);
 		}
 	}
 }

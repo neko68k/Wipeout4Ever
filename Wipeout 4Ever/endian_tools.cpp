@@ -1,6 +1,7 @@
-#include "stdafx.h"
+
 //#include <Windows.h>
 #include "endian_tools.h"
+
 
 
 WORD	readWORD(WORD in)

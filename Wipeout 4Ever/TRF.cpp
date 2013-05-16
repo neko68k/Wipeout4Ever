@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "binfile.h"
 #include "endian_tools.h"
 
@@ -18,16 +17,15 @@ void TRF_Load(BINFILE *file){
 	numfaces = filesize/0x20;
 	for(int i = 0;i<numfaces; i++){
 		// need to swap endian on each of these
-		TRF->vInd[0] = readWORD(TRF->vInd[0]);
-		TRF->vInd[0] = readWORD(TRF->vInd[1]);
-		TRF->vInd[0] = readWORD(TRF->vInd[2]);
-		TRF->vInd[0] = readWORD(TRF->vInd[3]);
+		SWAP_WORD(TRF->vInd[0]);
+		SWAP_WORD(TRF->vInd[1]);
+		SWAP_WORD(TRF->vInd[2]);
+		SWAP_WORD(TRF->vInd[3]);
 
-
-		TRF->unk[0] = readWORD(TRF->unk[0]);
-		TRF->unk[1] = readWORD(TRF->unk[1]);
-		TRF->unk[2] = readWORD(TRF->unk[2]);
-		TRF->unk[3] = readWORD(TRF->unk[3]);
+		SWAP_WORD(TRF->unk[0]);
+		SWAP_WORD(TRF->unk[1]);
+		SWAP_WORD(TRF->unk[2]);
+		SWAP_WORD(TRF->unk[3]);
 	}
 
 
