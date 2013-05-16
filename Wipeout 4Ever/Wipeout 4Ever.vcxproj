@@ -65,13 +65,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="binfile.cpp" />
+    <ClCompile Include="CMP.cpp" />
+    <ClCompile Include="endian_tools.cpp" />
+    <ClCompile Include="PRM.cpp" />
     <ClCompile Include="TGA.cpp" />
     <ClCompile Include="TIM.cpp" />
+    <ClCompile Include="TRACK.cpp" />
+    <ClCompile Include="TRF.cpp" />
+    <ClCompile Include="TRS.cpp" />
+    <ClCompile Include="TRV.cpp" />
+    <ClCompile Include="VEW.cpp" />
+    <ClCompile Include="vram.cpp" />
+    <ClCompile Include="WAD.cpp" />
     <ClCompile Include="Wipeout4Ever.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binfile.h" />
+    <ClInclude Include="CMP.h" />
+    <ClInclude Include="endian_tools.h" />
+    <ClInclude Include="PRM.h" />
     <ClInclude Include="TIM.h" />
+    <ClInclude Include="TRACK.h" />
+    <ClInclude Include="TRF.h" />
+    <ClInclude Include="TRS.h" />
+    <ClInclude Include="TRV.h" />
+    <ClInclude Include="vram.h" />
+    <ClInclude Include="WAD.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,7 +20,8 @@ BYTE TIM_Load(BINFILE *intim, bool isLibrary){
 	BYTE *pix = NULL;
 	BYTE *pal = NULL;
 
-	TIM_HDR *timHdr = (TIM_HDR*)TIM;
+	TIM_HDR *timHdr = (TIM_HDR*)calloc(1, sizeof(TIM_HDR));
+	binread(timHdr, sizeof(TIM_HDR), 1, intim);
 
 	BYTE mult = 2;
 
@@ -65,19 +66,12 @@ BYTE TIM_Load(BINFILE *intim, bool isLibrary){
 			}
 		}
 	}
+	
+	pal = (BYTE*)calloc(timHdr->pal.w*timHdr->pal.h, 2);
+	binread(pal, timHdr->pal.w*timHdr->pal.h, 2, intim);
 
-		pal = (BYTE*)calloc(timHdr->pal.w*timHdr->pal.h, 2);
-		binread(pal, timHdr->pal.w*timHdr->pal.h, 2, intim);
-
-		//binread(&pixHdr, sizeof(CHK_HDR), 1, intim);
-
-		//if(timHdr2 == 9 || timHdr2 == 8){
-
-		//}
-
-
-		pix = (BYTE*)calloc(timHdr->img.w*timHdr->img.h, mult);
-		binread(pix, timHdr->img.w*timHdr->img.h, mult, intim);
+	pix = (BYTE*)calloc(timHdr->img.w*timHdr->img.h, mult);
+	binread(pix, timHdr->img.w*timHdr->img.h, mult, intim);
 	//if(timHdr2 == 9 || timHdr2 == 8)
 		//VRAM_LoadTex(pix, pal, pixHdr, pixHdr.w*pixHdr.h*mult, palHdr, palHdr.w*palHdr.h*2);
 	//else

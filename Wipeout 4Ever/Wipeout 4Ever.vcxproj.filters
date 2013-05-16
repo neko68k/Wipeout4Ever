@@ -27,12 +27,69 @@
     <ClCompile Include="TIM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CMP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="endian_tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PRM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TRACK.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TRF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TRS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TRV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VEW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WAD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="binfile.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="TIM.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMP.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="endian_tools.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PRM.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRACK.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRF.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRV.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vram.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WAD.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
