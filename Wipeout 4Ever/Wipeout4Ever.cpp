@@ -45,10 +45,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	if ( RegisterClassA(&WndClass) )
     {
-      HWND  desktopWindow = GetDesktopWindow();
+		// get desktop metrics and calculate centered pos for dialog
+	  HWND  desktopWindow = GetDesktopWindow();
       GetWindowRect(desktopWindow, &Rect);
       int x = (Rect.right - Rect.left - 500) / 2;
       int y = (Rect.bottom - Rect.top - 360) / 2;
+
+	  // create dialog
       hWnd = CreateWindowExA(
                0x40000u,
                "PSYGWO2",
@@ -81,9 +84,12 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
     if ( !windowInitFlag )
       return 0;
 
-	HBITMAP h = LoadBitmapA(hInstance, (LPCSTR)113);
-    HBITMAP dword_4C7BD8 = LoadBitmapA(hInstance, (LPCSTR)0x72);
-    dword_48F81C = WO_ConfigLoad();
+	//logos for options dialog
+	HBITMAP WO_Dialog_WipeoutLogo = LoadBitmapA(hInstance, (LPCSTR)113);	 
+    HBITMAP WO_Dialog_PsygnosisLogo = LoadBitmapA(hInstance, (LPCSTR)114);                          
+    WO_Config_LoadedFlag  = WO_ConfigLoad();
+
+	// create all dialog widgets
     WO_CreateConfigPopup();
     ShowWindow(hWnd, 1);
     UpdateWindow(hWnd);
