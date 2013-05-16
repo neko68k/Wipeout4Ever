@@ -4,15 +4,23 @@
 #include "binfile.h"
 
 typedef struct{
-	DWORD len;	// incl header
+	DWORD magic;	// 0x10000000
+	DWORD bpp;		
+	DWORD len;		// incl header
+	struct PAL{
 	WORD x;
 	WORD y;
 	WORD w;
-	WORD h;
-}CHK_HDR;
+	WORD h;}pal;
+	struct IMG{
+	WORD x;
+	WORD y;
+	WORD w;
+	WORD h;}img;
+}TIM_HDR;
 
 
-void TIM_Load(BINFILE *infile);
+BYTE TIM_Load(BINFILE *infile);
 
 
 #endif

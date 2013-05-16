@@ -1,6 +1,5 @@
 
 #include <Windows.h>
-//#include <stdio.h>
 #include "tim.h"
 //#include "vram.h"
 #include "binfile.h"
@@ -14,40 +13,37 @@ static WORD TimAutoX = 0;
 static WORD TimAutoY = 0;
 
 
-void TIM_Load(BINFILE *intim, bool isLibrary){
-	CHK_HDR *palHdr;
-	CHK_HDR *pixHdr;
+BYTE TIM_Load(BINFILE *intim, bool isLibrary){
 
 	BYTE *TIM = intim->base;
 
 	BYTE *pix = NULL;
 	BYTE *pal = NULL;
 
-	DWORD *timHdr2 = (DWORD*)TIM+4;
+	TIM_HDR *timHdr = (TIM_HDR*)TIM;
 
 	BYTE mult = 2;
 
-	DWORD magic;
 	//binread(&magic, 4, 1, intim);
 
 	//binread(&timHdr2, 4, 1, intim);	
-
-	if(((*timHdr2) & 7) == 1){
+	if(timHdr->magic!=0x10000000)
+		return 0;
+	if(((timHdr->bpp) & 7) == 1){
 		//do 8-bit
-		if(*(WORD*)TIM+536==0&&*(WORD*)TIM+538==0)
+		if(timHdr->img.x==0&&timHdr->img.y==0)
 			return;	// cant autoplace 8 bit textures
 	}
 	else{
-		//do 4-bit
-		//binread(&palHdr, sizeof(CHK_HDR), 1, intim);
+		//do 4-bit		
 		// 4-bit autoplace if img x/y == 0
-		if(*(WORD*)TIM+56==0&&*(WORD*)TIM+58==0){		
-			*(WORD*)(TIM+12)=PalAutoX;	// pal x
-			*(WORD*)(TIM+14)=PalAutoY;	// pal y
-			*(WORD*)(TIM+16)=0x10;		// pal w
-			*(WORD*)(TIM+18)=1;			// pal h
-			*(WORD*)(TIM+56)=TimAutoX;	// img x
-			*(WORD*)(TIM+58)=TimAutoY;	// img y
+		if(timHdr->img.x==0&&timHdr->img.y==0){		
+			timHdr->pal.x=PalAutoX;	// pal x
+			timHdr->pal.y=PalAutoY;	// pal y
+			timHdr->pal.w=0x10;		// pal w
+			timHdr->pal.h=1;			// pal h
+			timHdr->img.x=TimAutoX;	// img x
+			timHdr->img.y=TimAutoY;	// img y
 
 			PalAutoX += 16;
 
@@ -70,8 +66,8 @@ void TIM_Load(BINFILE *intim, bool isLibrary){
 		}
 	}
 
-		//pal = (BYTE*)calloc(palHdr.w*palHdr.h, 2);
-		//binread(pal, palHdr.w*palHdr.h, 2, intim);
+		pal = (BYTE*)calloc(timHdr->pal.w*timHdr->pal.h, 2);
+		binread(pal, timHdr->pal.w*timHdr->pal.h, 2, intim);
 
 		//binread(&pixHdr, sizeof(CHK_HDR), 1, intim);
 
@@ -80,8 +76,8 @@ void TIM_Load(BINFILE *intim, bool isLibrary){
 		//}
 
 
-		//pix = (BYTE*)calloc(pixHdr.w*pixHdr.h, mult);
-		//binread(pix, pixHdr.w*pixHdr.h, mult, intim);
+		pix = (BYTE*)calloc(timHdr->img.w*timHdr->img.h, mult);
+		binread(pix, timHdr->img.w*timHdr->img.h, mult, intim);
 	//if(timHdr2 == 9 || timHdr2 == 8)
 		//VRAM_LoadTex(pix, pal, pixHdr, pixHdr.w*pixHdr.h*mult, palHdr, palHdr.w*palHdr.h*2);
 	//else
