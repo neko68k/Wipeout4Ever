@@ -64,8 +64,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="binfile.cpp" />
     <ClCompile Include="TGA.cpp" />
+    <ClCompile Include="TIM.cpp" />
     <ClCompile Include="Wipeout4Ever.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="binfile.h" />
+    <ClInclude Include="TIM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
