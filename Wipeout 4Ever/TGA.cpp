@@ -20,7 +20,7 @@ typedef struct TGA_HDR{
 	WORD width;
 	WORD height;
 	BYTE bpp;
-	BYTE imageDesc; // bits 0-3 give alpha depth, bits 5-4 give direction	
+	BYTE imageDesc; // bits 0-3 give alpha depth, bits 4-5 give direction	
 };
 
 typedef struct TGA{

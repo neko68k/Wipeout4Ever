@@ -16,7 +16,7 @@ void TRF_Load(BINFILE *file){
 
 	numfaces = filesize/0x20;
 	for(int i = 0;i<numfaces; i++){
-		// need to swap endian on each of these
+
 		SWAP_WORD(TRF->vInd[0]);
 		SWAP_WORD(TRF->vInd[1]);
 		SWAP_WORD(TRF->vInd[2]);
