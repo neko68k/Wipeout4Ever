@@ -83,6 +83,7 @@
     <ClInclude Include="binfile.h" />
     <ClInclude Include="CMP.h" />
     <ClInclude Include="endian_tools.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="PRM.h" />
     <ClInclude Include="TIM.h" />
     <ClInclude Include="TRACK.h" />

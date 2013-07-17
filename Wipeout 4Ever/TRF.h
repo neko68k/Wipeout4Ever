@@ -1,7 +1,7 @@
 #ifndef __TRF_H__
 #define __TRF_H__
 
-#include "stdafx.h"
+//#include "stdafx.h"
 
 typedef struct {
     short vInd[4];    /* Vertex indices in [[.TRV]] file */

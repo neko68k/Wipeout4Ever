@@ -92,5 +92,8 @@
     <ClInclude Include="WAD.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
