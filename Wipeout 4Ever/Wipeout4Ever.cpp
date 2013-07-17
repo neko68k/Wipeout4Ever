@@ -17,7 +17,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 	HMODULE hModule;
 	bool windowInitFlag;
 	HWND hWnd = FindWindowA("PSYGWO2", 0);
-	HWND v5 = hWnd;
 	RECT Rect;
 	if( hWnd!=0 ){
 		HWND lastWnd = GetLastActivePopup(hWnd);
@@ -68,7 +67,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
                0);
       if ( hWnd )
       {
-        WO_DDrawInit();
+        WO_DDrawConfigInit();
         SetWindowPos(hWnd, 0, x, y, 500, 360, 0x14u);
         windowInitFlag = 1;
       }
