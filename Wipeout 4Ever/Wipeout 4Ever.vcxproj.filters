@@ -57,43 +57,49 @@
     <ClCompile Include="WAD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="binfile.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TIM.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CMP.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="endian_tools.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PRM.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="TRACK.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TRF.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TRS.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TRV.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vram.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WAD.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PRM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TIM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TRV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WAD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="binfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="endian_tools.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

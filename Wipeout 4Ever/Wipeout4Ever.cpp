@@ -1,9 +1,36 @@
 #include <Windows.h>
 #include "Globals.h"
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+	switch (uMsg) 
+    { 
+        case WM_CREATE: 
+            // Initialize the window. 
+            return 0; 
+ 
+        case WM_PAINT: 
+            // Paint the window's client area. 
+            return 0; 
+ 
+        case WM_SIZE: 
+            // Set the size and position of the window. 
+            return 0; 
+ 
+        case WM_DESTROY: 
+            // Clean up window-specific data objects. 
+            return 0; 
+ 
+        // 
+        // Process other messages. 
+        // 
+ 
+        default: 
+            return DefWindowProc(hWnd, uMsg, wParam, lParam); 
+    } 
+    return 0; 
+}
 
-int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
 	int v6 = 0;
 	int v60 = 0;
@@ -67,13 +94,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
                0);
       if ( hWnd )
       {
-        WO_DDrawConfigInit();
+       // WO_DDrawConfigInit();
         SetWindowPos(hWnd, 0, x, y, 500, 360, 0x14u);
         windowInitFlag = 1;
       }
       else
       {
-        WO_StupidDDrawErrorMsg("CreateWindowEx failed");
+        //WO_StupidDDrawErrorMsg("CreateWindowEx failed");
         windowInitFlag = 0;
       }
     }
@@ -85,15 +112,15 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
       return 0;
 
 	//logos for options dialog
-	HBITMAP WO_Dialog_WipeoutLogo = LoadBitmapA(hInstance, (LPCSTR)113);	 
-    HBITMAP WO_Dialog_PsygnosisLogo = LoadBitmapA(hInstance, (LPCSTR)114);                          
-    WO_Config_LoadedFlag  = WO_ConfigLoad();
+	//HBITMAP WO_Dialog_WipeoutLogo = LoadBitmapA(hInstance, (LPCSTR)113);	 
+    //HBITMAP WO_Dialog_PsygnosisLogo = LoadBitmapA(hInstance, (LPCSTR)114);                          
+    //WO_Config_LoadedFlag  = WO_ConfigLoad();
 
 	// create all dialog widgets
-    WO_CreateConfigPopup();
+    //WO_CreateConfigPopup();
     ShowWindow(hWnd, 1);
     UpdateWindow(hWnd);
-    WO_GameStateStruct = (int)&unk_917920;
+   /* WO_GameStateStruct = (int)&unk_917920;
     byte_917926 = 1;
     WO_CD_Init();
     WO_CD_DRM();
@@ -109,9 +136,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
     word_4C7AC4 = 320;
     byte_4C7AB6 = 0;
     word_4C7AC6 = 240;
+	*/
 
-
-
+	while(1){
+	}
 
 
 

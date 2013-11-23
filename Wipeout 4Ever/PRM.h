@@ -1,6 +1,6 @@
 #ifndef __PRM_H__
 #define __PRM_H__
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "binfile.h"
 #include "endian_tools.h"
 #include <vector>
@@ -8,7 +8,7 @@
 typedef struct {
     unsigned char name[15]; /* Object name */
     unsigned char unknown1;
-    unsigned short vtx_count; /* Number of vertices */
+    unsigned short vtx_count; /* Number of vertices, this is correct*/
     unsigned short unknown2[7];
     unsigned short poly_count; /* Number of polygones */
     unsigned short unknown3[9];
@@ -40,6 +40,7 @@ typedef struct {
 
 
 //Then the polygon data follows the type:
+/*** sizes below include type byte ***/
 //Polygon type 0x01
 typedef struct {
 	unsigned short unknown1;
@@ -47,28 +48,25 @@ typedef struct {
 	unsigned short unknown2[3];
 } prm_object_polygon_1_t;
 
-//Polygon type 0x02
+//Polygon type 0x02, 0x1C bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[3];	/* Vertices index */
-	unsigned short colour_index;	// this is converted from the stored value to something from the texture table
-	unsigned short unknown2[6];
-	unsigned char  unknown3[6];	
+	unsigned char unknown2[12];
 } prm_object_polygon_2_t;
 
-//Polygon type 0x03
+//Polygon type 0x03, 0x10 bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
 	unsigned short unknown2[2];
 } prm_object_polygon_3_t;
 
-//Polygon type 0x04 : Quad
+//Polygon type 0x04 : Quad, 0x20 bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
-	unsigned short colour_index;
-	unsigned short unknown2[2];
+	unsigned char unknown2[14];
 } prm_object_polygon_4_t;
 
 //Polygon type 0x05 : Gouraud triangle

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <Windows.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,14 +16,14 @@ unsigned char *loadFile(char *filename, int *length)
 	unsigned char *buffer;
 
 	/* Load file */
-	handle = open(filename, O_RDONLY);
+	handle = _open(filename, O_RDONLY);
 	if (handle<0) {
 		fprintf(stderr, "Unable to open %s\n", filename);	
 		return NULL;
 	}
 
-	*length = lseek(handle, 0, SEEK_END);
-	lseek(handle, 0, SEEK_SET); 	
+	*length = _lseek(handle, 0, SEEK_END);
+	_lseek(handle, 0, SEEK_SET); 	
 
 	buffer = (unsigned char *)malloc(*length);
 	if (buffer==NULL) {
@@ -31,8 +31,8 @@ unsigned char *loadFile(char *filename, int *length)
 		return NULL;
 	}
 
-	read(handle, buffer, *length);
-	close(handle);
+	_read(handle, buffer, *length);
+	_close(handle);
 
 	return buffer;
 }

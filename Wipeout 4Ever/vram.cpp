@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <Windows.h>
 #include <stdio.h>
 //#include "binfile.h"
@@ -10,7 +10,7 @@
 #define HI(x)  ((BYTE) ((BYTE) (x) >> (BYTE) 4))
 
 BYTE VRAM[1024*512*2];
-
+/*
 
 // borrowed from psx_vram by agemo
 WORD C8toC5(BYTE r, BYTE g, BYTE b){
@@ -53,7 +53,7 @@ void VRAM_LoadTex(BYTE *pix, CHK_HDR pixHdr, WORD pixsize){
 		memcpy(&VRAM[(y+pixHdr.y)*2*1024+pixHdr.x*2], &pix[y*(pixHdr.w*2)], pixHdr.w*2);
 	}	
 }
-
+*/
 
 void VRAM_SetTPage(WORD x, WORD y);
 void VRAM_GetTexture(WORD x, WORD y);

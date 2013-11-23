@@ -33,7 +33,7 @@ BYTE TIM_Load(BINFILE *intim, bool isLibrary){
 	if(((timHdr->bpp) & 7) == 1){
 		//do 8-bit
 		if(timHdr->img.x==0&&timHdr->img.y==0)
-			return;	// cant autoplace 8 bit textures
+			return -1;	// cant autoplace 8 bit textures
 	}
 	else{
 		//do 4-bit		
@@ -76,4 +76,5 @@ BYTE TIM_Load(BINFILE *intim, bool isLibrary){
 		//VRAM_LoadTex(pix, pal, pixHdr, pixHdr.w*pixHdr.h*mult, palHdr, palHdr.w*palHdr.h*2);
 	//else
 		//VRAM_LoadTex(pix, pixHdr, pixHdr.w*pixHdr.h*mult);
+	return 0;
 }

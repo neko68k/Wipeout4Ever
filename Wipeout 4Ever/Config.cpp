@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include "Globals.h"
 
-typedef struct WO_CONFIG_FILE{ // (sizeof=0xB4)
-DWORD field_0;
+struct WO_CONFIG_FILE{ // (sizeof=0xB4)
+DWORD field_0;	
 DWORD field_4;
 DWORD field_8;
 WORD field_C;
-WORD field_E;
+WORD DX_NumDisplays;
 WORD field_10;
 WORD field_12;
 WORD field_14;
@@ -77,7 +77,16 @@ void WO_ConfigLoad(){
 	if(Config_DAT){
 		fread(&WO_ConfigBuf, configSize, 1, Config_DAT);
 		fclose(Config_DAT);
-		// theres some check of WO_ConfigBuf2 != 1234(0x4D2) here. the resolution is 640x480 if true
+		if(WO_ConfigBuf.DX_NumDisplays != 1234||WO_ConfigBuf.field_10 != 5678){
+/*			if(WO_DX_NumDisplays == WO_ConfigBuf.DX_NumDisplays)
+				if(word_48F8B4 == WO_ConfigBuf.field_10){
+					word_48F8BC = WO_ConfigBuf.field_C;
+					word_48F8C8 = WO_ConfigBuf.field_0;
+					word_48F8CC = WO_ConfigBuf.field_4;
+					word_48F82C = WO_ConfigBuf.field_8;
+				}*/
+				
+		}
 	}
 
 
