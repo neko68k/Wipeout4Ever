@@ -6,21 +6,24 @@
 #include <vector>
 
 typedef struct {
-    unsigned char name[15]; /* Object name */
+    unsigned char name[15];		 /* Object name */
     unsigned char unknown1;
-    unsigned short vtx_count; /* Number of vertices, this is correct*/
-    unsigned short unknown2[7];
-    unsigned short poly_count; /* Number of polygones */
-    unsigned short unknown3[9];
-	unsigned long unknown;
-    unsigned short index1;
-    unsigned short unknown4[14];
-    long position_x; /* Position of object relative to origin */
-    long position_y;
-    long position_z;
-    unsigned short unknown5[10];
-    long objcoord2[3];
-    unsigned short unknown6[8];
+    unsigned long vtx_count;	/* Number of vertices, this is correct*/
+	void *vertexPointer;		// set at runtime
+	short unkShort1;
+	short unkShort2;
+	void *unkPtr1;
+    unsigned short poly_count;	/* Number of polygones */
+	unsigned short unkShort3;
+	void *facePointer;			// set at runtime
+	void *unkPtr2;				// set at runtime
+	void *unkPtr3;				// set at runtime
+	void *unkPtr4;				// points after all the hdr pointers, set at runtime
+	unsigned short unk[4];
+	void *nextPtr;				// points at next model in PRM file, set at runtime
+    unsigned short unknown4[48];
+    void *unkPrt5;
+	unsigned long unk2[2];
 } prm_object_header_t;
 
 //Vertices
@@ -43,16 +46,17 @@ typedef struct {
 /*** sizes below include type byte ***/
 //Polygon type 0x01
 typedef struct {
-	unsigned short unknown1;
+	unsigned short unknown1;	// face normal?
 	unsigned short vertices[3];	/* Vertices index */
-	unsigned short unknown2[3];
+	unsigned short unknown2[3]; // vertex colors?
 } prm_object_polygon_1_t;
 
 //Polygon type 0x02, 0x1C bytes
 typedef struct {
-	unsigned short unknown1;
+	unsigned short unknown1;	// face normal?
 	unsigned short vertices[3];	/* Vertices index */
-	unsigned char unknown2[12];
+	unsigned short unknown2[7]; // u/v?
+	unsigned char color[4];
 } prm_object_polygon_2_t;
 
 //Polygon type 0x03, 0x10 bytes
@@ -66,7 +70,8 @@ typedef struct {
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
-	unsigned char unknown2[14];
+	unsigned char unknown2[10];
+	unsigned char color[4];
 } prm_object_polygon_4_t;
 
 //Polygon type 0x05 : Gouraud triangle, 0x18 bytes
