@@ -8,7 +8,8 @@
 typedef struct {
     unsigned char name[15];		 /* Object name */
     unsigned char unknown1;
-    unsigned long vtx_count;	/* Number of vertices, this is correct*/
+    unsigned short vtx_count;	/* Number of vertices, this is correct*/
+	unsigned short unkShort3;
 	void *vertexPointer;		// set at runtime
 	short unkShort1;
 	short unkShort2;
@@ -70,7 +71,7 @@ typedef struct {
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
-	unsigned char unknown2[10];
+	unsigned char unknown2[16];
 	unsigned char color[4];
 } prm_object_polygon_4_t;
 
