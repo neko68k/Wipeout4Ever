@@ -69,7 +69,7 @@ typedef struct {
 	unsigned char unknown2[14];
 } prm_object_polygon_4_t;
 
-//Polygon type 0x05 : Gouraud triangle
+//Polygon type 0x05 : Gouraud triangle, 0x18 bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[3];	/* Vertices index */
@@ -91,10 +91,7 @@ typedef struct {
 	unsigned short unknown[12];
 } prm_object_polygon_6_s00s01_t;
 
-//After this one follows 'name_count' character strings:
-typedef struct {
-	unsigned char name[12];	/* Name */
-} prm_object_polygon_6_name_t;
+
 
 //Polygon type 0x06, subtype 0x80
 typedef struct {
@@ -103,9 +100,14 @@ typedef struct {
 	prm_object_polygon_6_name_t *names;
 } prm_object_polygon_6_s80_t;
 
+//After this one follows 'name_count' character strings:
+typedef struct {
+	unsigned char name[12];	/* Name */
+} prm_object_polygon_6_name_t;
 
 
-//Polygon type 0x07 : Gouraud quad
+
+//Polygon type 0x07 : Gouraud quad, 0x1C bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
@@ -130,122 +132,31 @@ typedef struct {
 class PRM{
 public:
 	PRM(char *fn){
+		BINFILE *infile;
 		infile = NULL;
 		if(fn)
 			infile = binopen(fn);
 		if(infile)
-			Read();
+			Read(infile);
+		binclose(infile);
 	}
 	~PRM(){}
 
 private:
-	BINFILE *infile;
+	
 	prm_object_header_t header;
-	std::vector<prm_object_polygon_1_t*> poly1;
-	std::vector<prm_object_polygon_2_t*> poly2;
-	std::vector<prm_object_polygon_3_t*> poly3;
-	std::vector<prm_object_polygon_4_t*> poly4;
-	std::vector<prm_object_polygon_5_t*> poly5;
-
-	std::vector<prm_object_polygon_6_s00s01_t*> poly6s00s01;
-	std::vector<prm_object_polygon_6_s80_t*> poly6s80;
-
-	std::vector<prm_object_polygon_7_t*> poly7;
-	std::vector<prm_object_polygon_8_t*> poly8;
-	std::vector<prm_object_polygon_10_t*> polyA;
-	std::vector<prm_object_polygon_10_t*> polyB;
-
 	prm_object_vertex_t *verts;
 
-	void Read(){
-		binread(&header, sizeof(prm_object_header_t), 1, infile);
-		header.vtx_count = readWORD(header.vtx_count);
-		header.poly_count = readWORD(header.poly_count);
-		verts = (prm_object_vertex_t*)calloc(header.vtx_count, 
-			sizeof(prm_object_vertex_t));
-		binread(verts, sizeof(prm_object_vertex_t), header.vtx_count, infile);
+	void Read(BINFILE *in){
+		 binread(&header, sizeof(header), 1, in);
+		 verts = (prm_object_vertex_t*)in->current;
+		 binseek(in, header.vtx_count*sizeof(prm_object_vertex_t), BIN_CUR);
+		 for(int i=0;i<header.vtx_count;i++){
 
-		for(int i = 0; i<header.poly_count-1;i++){
-			WORD type;
-			binread(&type, 2, 1, infile);
-			type = readWORD(type);
-			int test = sizeof(prm_object_polygon_8_t);
-			void *work;
-			switch(type){
-			case 0x01:
-				work = malloc(sizeof(prm_object_polygon_1_t));
-				binread(work, sizeof( prm_object_polygon_1_t), 1, infile);
-				poly1.push_back((prm_object_polygon_1_t*)work);
-				break;
-			case 0x02:
-				work = malloc(sizeof(prm_object_polygon_2_t));
-				binread(work, sizeof( prm_object_polygon_2_t), 1, infile);
-				poly2.push_back((prm_object_polygon_2_t*)work);
-				break;
-			case 0x03:
-				work = malloc(sizeof(prm_object_polygon_3_t));
-				binread(work, sizeof( prm_object_polygon_3_t), 1, infile);
-				poly3.push_back((prm_object_polygon_3_t*)work);
-				break;
-			case 0x04:
-				work = malloc(sizeof(prm_object_polygon_4_t));
-				binread(work, sizeof( prm_object_polygon_4_t), 1, infile);
-				poly4.push_back((prm_object_polygon_4_t*)work);
-				break;
-			case 0x05:
-				work = malloc(sizeof(prm_object_polygon_5_t));
-				binread(work, sizeof( prm_object_polygon_5_t), 1, infile);
-				poly5.push_back((prm_object_polygon_5_t*)work);
-				break;
-			case 0x06:
-				WORD type6;
-				binread(&type6, 2, 1, infile);
-				type6 = readWORD(type6);
-				switch(type6){
-				case 0x00:
-				case 0x01:
-					work = malloc(sizeof(prm_object_polygon_6_s00s01_t));
-					binread(work, sizeof(prm_object_polygon_6_s00s01_t), 1, infile);
-					poly6s00s01.push_back((prm_object_polygon_6_s00s01_t*)work);
-					break;
-				case 0x80:
-					work = malloc(sizeof(prm_object_polygon_6_s80_t));
-					binread(work, sizeof(prm_object_polygon_6_s80_t)-4, 1, infile);
-					prm_object_polygon_6_s80_t*temp=(prm_object_polygon_6_s80_t*)work;
-					temp->names=(prm_object_polygon_6_name_t*)calloc(sizeof(prm_object_polygon_6_name_t), temp->name_count);
-					binread(temp->names, temp->name_count, 12, infile);
-					poly6s80.push_back((prm_object_polygon_6_s80_t*)work);
-					break;
-				}
-				break;
-			case 0x07:
-				work = malloc(sizeof(prm_object_polygon_7_t));
-				binread(work, sizeof( prm_object_polygon_7_t), 1, infile);
-				poly7.push_back((prm_object_polygon_7_t*)work);
-				break;
-			case 0x08:
-				work = malloc(sizeof(prm_object_polygon_8_t));
-				binread(work, sizeof( prm_object_polygon_8_t), 1, infile);
-				work = malloc(0x2a);
-				binread(work, 0x2a, 1, infile);
-				poly8.push_back((prm_object_polygon_8_t*)work);
-				break;
+		 }
 
-			case 0x0A:
-				work = malloc(sizeof(prm_object_polygon_10_t));
-				binread(work, sizeof( prm_object_polygon_10_t), 1, infile);
-				polyA.push_back((prm_object_polygon_10_t*)work);
-				break;
-			case 0x0B:
-				work = malloc(sizeof(prm_object_polygon_10_t));
-				binread(work, sizeof( prm_object_polygon_10_t), 1, infile);
-				polyB.push_back((prm_object_polygon_10_t*)work);
-				break;
 
-			default:
-				break;
-			};
-		}
+		
 	}
 };
 
