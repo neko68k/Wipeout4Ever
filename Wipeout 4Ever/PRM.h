@@ -21,7 +21,7 @@ typedef struct {
 	void *unkPtr4;				// points after all the hdr pointers, set at runtime
 	unsigned short unk[4];
 	void *nextPtr;				// points at next model in PRM file, set at runtime
-    unsigned short unknown4[48];
+    unsigned short unknown4[34];
     void *unkPrt5;
 	unsigned long unk2[2];
 } prm_object_header_t;
