@@ -22,7 +22,8 @@ typedef struct {
 	void *unkPtr4;				// points after all the hdr pointers, set at runtime
 	unsigned short unk[4];
 	void *nextPtr;				// points at next model in PRM file, set at runtime
-    unsigned short unknown4[34];
+    unsigned short unknown4[32];
+	unsigned short unknown5[2];
     void *unkPrt5;
 	unsigned long unk2[2];
 } prm_object_header_t;
@@ -67,7 +68,7 @@ typedef struct {
 	unsigned short unknown2[2];
 } prm_object_polygon_3_t;
 
-//Polygon type 0x04 : Quad, 0x20 bytes
+//Polygon type 0x04 : Textured Quad, 0x20 bytes
 typedef struct {
 	unsigned short unknown1;
 	unsigned short vertices[4];	/* Vertices index */
