@@ -5,23 +5,30 @@
 #include "endian_tools.h"
 #include <vector>
 
+enum{
+	TRI_FLAT = 1
+};
+
 typedef struct {
     unsigned char name[15];		 /* Object name */
     unsigned char unknown1;
     unsigned short vtx_count;	/* Number of vertices, this is correct*/
+								// faces are regenerated to contain a unique copy of each vertex
+								// and this count may be larger after that processing takes place
 	unsigned short unkShort3;
 	void *vertexPointer;		// set at runtime
 	short unkShort1;
 	short unkShort2;
 	void *unkPtr1;
     unsigned short poly_count;	/* Number of polygones */
-	unsigned short unkShort3;
+	unsigned short unkShort4;
 	void *facePointer;			// set at runtime
 	void *unkPtr2;				// set at runtime
 	void *unkPtr3;				// set at runtime
 	void *unkPtr4;				// points after all the hdr pointers, set at runtime
 	unsigned short unk[4];
-	void *nextPtr;				// points at next model in PRM file, set at runtime
+	void *nextPtr;				// points at next model in PRM file, set at runtime after all data in a 
+								// model are processed
     unsigned short unknown4[32];
 	unsigned short unknown5[2];
     void *unkPrt5;
@@ -57,8 +64,8 @@ typedef struct {
 typedef struct {
 	unsigned short unknown1;	// face normal?
 	unsigned short vertices[3];	/* Vertices index */
-	unsigned short unknown2[7]; // u/v?
-	unsigned char color[4];
+	unsigned short unknown2[4]; // u/v?
+	unsigned char color[3];
 } prm_object_polygon_2_t;
 
 //Polygon type 0x03, 0x10 bytes
