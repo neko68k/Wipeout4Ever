@@ -64,7 +64,9 @@ typedef struct {
 typedef struct {
 	unsigned short unknown1;	// face normal?
 	unsigned short vertices[3];	/* Vertices index */
-	unsigned short unknown2[4]; // u/v?
+	unsigned short textureID;	// added to an offset and used to index WTL. WTL contains 
+								// pointers to loaded textures
+	unsigned short unknown2[3]; // u/v?
 	unsigned char color[3];
 } prm_object_polygon_2_t;
 
